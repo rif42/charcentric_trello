@@ -25,3 +25,29 @@ body {
     )
     rgb(var(--background-start-rgb));
 }
+/* 
+* * * {
+  background-color:green!important
+}
+
+* * * * {
+  background-color:blue!important 
+}
+
+* * * * * {
+  background-color:purple!important
+}
+
+* * * * * * {
+  background-color:yellow!important
+}
+
+* * * * * * *{
+  background-color:orange!important
+}
+
+* * * * * * * *{
+  background-color:red!important
+}  */
+
+
