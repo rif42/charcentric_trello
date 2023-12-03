@@ -1,15 +1,15 @@
+"use server"
+
 import Image from "next/image";
 import { Input } from "postcss";
 import React from "react";
-import { options } from "../api/auth/[...nextauth]/options";
-import { getServerSession } from "next-auth";
 import Link from "next/link";
+import LogoutButton from "../auth/components/LogoutButton";
 
 export default async function Header() {
-  const session = await getServerSession(options);
 
   return (
-    <nav className="flex flex-row h-20 w-full bg-red-200">
+    <nav className="flex flex-row h-20 w-full border border-gray-500">
       <div className="flex grow-0 flex-col justify-center items-center px-10">
         <Image src="/trello.png" width={100} height={100} alt="Trello logo" />
       </div>
@@ -26,7 +26,7 @@ export default async function Header() {
       <div className="flex grow-0 w-[20%] flex-col justify-center items-center px-10">
         <input
           placeholder="Search"
-          className="rounded-lg w-[100%] text-red-500 p-1"
+          className="rounded-lg w-[100%] p-1 border border-gray-500 bg-gray-100"
         />
         <Image
           src="/search.png"
@@ -61,12 +61,11 @@ export default async function Header() {
         />
       </div>
       <div className="flex grow-0 flex-col justify-center items-center px-10">
-        <Image src="/User.png" width={50} height={50} alt="user profile picture" /> //TODO: add user image fetched from backend, use client component
+        <Image src="/User.png" width={50} height={50} alt="user profile picture" /> 
+        {/* TODO: add user image fetched from backend, use client component */}
       </div>
       <div className="flex grow-0 flex-col justify-center items-center pr-10">
-        <Link href={session ? "/api/auth/signout" : "/api/auth/signin"}>
-          {session ? "Sign Out" : "Sign In"}
-        </Link>
+        <LogoutButton />
       </div>
     </nav>
   );
