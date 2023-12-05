@@ -28,10 +28,10 @@ export default function LoginForm() {
   });
 
   async function onSubmit (data: FormData) {
-    toast(JSON.stringify(data));
+    // toast(JSON.stringify(data));
     const result = await signInWithEmailAndPassword(data);
     const {error} = JSON.parse(result);
-    error? toast.error(error.message): console.log(result);
+    error? toast.error(error.message): "Logged in successfully";
   };
 
   return (

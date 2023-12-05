@@ -37,10 +37,10 @@ export default function RegisterForm() {
   });
 
   async function onSubmit (data: FormData) {
-    toast(JSON.stringify(data));
+    // toast(JSON.stringify(data));
     const result = await signUpWithEmailAndPassword(data);
     const {error} = JSON.parse(result);
-    error? toast.error(error.message): console.log(result);
+    error? toast.error(error.message): "Registered successfully";
   };
 
   return (

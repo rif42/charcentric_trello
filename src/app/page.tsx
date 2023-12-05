@@ -7,7 +7,6 @@ import 'react-toastify/dist/ReactToastify.css';
 
 
 export default async function Home() {
-  console.log("lmao")
   const {data} = await readUserSession();
   if (!data.session){
     return redirect("/auth")
