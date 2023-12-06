@@ -1,6 +1,6 @@
 import React from "react";
 import AuthForm from "./components/AuthForm";
-import readUserSession from "@/src/lib/actions";
+import readUserSession from "../actions";
 import { redirect } from "next/navigation"
 
 export default async function page(){

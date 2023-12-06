@@ -1,4 +1,4 @@
-import createSupabaseServerClient from "@/src/lib/supabase/server";
+import createSupabaseServerClient from "@/src/app/lib/supabase/server";
 import React from "react";
 import { redirect } from "next/navigation";
 

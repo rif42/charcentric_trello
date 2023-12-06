@@ -3,7 +3,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import { signInWithEmailAndPassword } from "../actions";
+import { signInWithEmailAndPassword } from "../../actions";
 
 const FormSchema = z.object({
   email: z.string().email(),

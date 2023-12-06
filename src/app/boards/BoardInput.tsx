@@ -1,51 +1,54 @@
-"use client";
+"use client"
 
+import React from "react";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { createBoard, signInWithEmailAndPassword } from "../auth/actions";
+import { createBoard } from "../actions";
 
 const FormSchema = z.object({
-  title: z.string().min(1, {
-    message: "Title is required.",
-  }),
+  board_title: z.string().min(1, "board_title is required."),
+  description: z.string().min(1, "Description is required."),
 });
 
 export default function CardInput() {
-  const form = useForm<z.infer<typeof FormSchema>>({
+  const form = useForm({
     resolver: zodResolver(FormSchema),
     defaultValues: {
-      title: "",
+      board_title: "",
+      description: "",
     },
   });
+  
+  const { errors } = form.formState;
 
-  async function onSubmit(data: z.infer<typeof FormSchema>) {
-    console.log(data)
+  const onSubmit = async (data: z.infer<typeof FormSchema>) => {
     toast(JSON.stringify(data));
-    const result = await createBoard(data.title);
-    const { error } = JSON.parse(result);
-    error ? toast.error(error.message) : "Logged in successfully";
+    const result = await createBoard({ board_title: data.board_title, board_desc: data.description});
+    toast(JSON.stringify(result));
     form.reset();
-  }
+  };
 
   return (
-    <form
-      className="flex flex-col w-96 min-h-[30rem] h-[40vh] justify-center align-middle items-center bg-slate-300 rounded-bl-lg rounded-br-lg"
-      onSubmit={form.handleSubmit(onSubmit)}
-    >
-      <ToastContainer />
-      <div className="flex flex-col justify-center align-middle text-center pb-10 w-[75%]">
-        <label className="pb-2">title</label>
-        <input className="rounded-md p-3" type="text" />
+    <form onSubmit={form.handleSubmit(onSubmit)}>
+      <div>
+        <label>board_title</label>
+        <input type="text" {...form.register("board_title")} />
+        {errors.board_title && (
+          <span>{errors.board_title.message}</span>
+        )}
       </div>
-      <button
-        className="py-3 px-5 bg-black text-white rounded-lg"
-        type="submit"
-      >
-        Login
-      </button>
+      <div>
+        <label>Description</label>
+        <input type="text" {...form.register("description")} />
+        {errors.description && (
+          <span>{errors.description.message}</span>
+        )}
+      </div>
+      <button type="submit">Submit</button>
+      <ToastContainer />
     </form>
   );
 }

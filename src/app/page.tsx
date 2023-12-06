@@ -1,7 +1,7 @@
 
 import AuthForm from "./auth/components/AuthForm";
 import {redirect} from "next/navigation"
-import readUserSession from "../lib/actions";
+import readUserSession from "./actions";
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 
