@@ -1,7 +1,6 @@
 "use server"
 import createSupabaseServerClient from "@/src/lib/supabase/server";
 
-
 export async function signUpWithEmailAndPassword(data: { email: string; password: string, confirm:string}) {
     const supabase = await createSupabaseServerClient()
     const result = await supabase.auth.signUp({email: data.email, password: data.password})
@@ -11,5 +10,12 @@ export async function signUpWithEmailAndPassword(data: { email: string; password
 export async function signInWithEmailAndPassword(data: { email: string; password: string}) {
     const supabase = await createSupabaseServerClient()
     const result = await supabase.auth.signInWithPassword({email: data.email, password: data.password})
+    return JSON.stringify(result);
+}
+
+export async function createBoard (title:string){
+    const supabase = await createSupabaseServerClient()
+    const result = await supabase.from("Boards").insert([{title}]).single()
+    console.log(title)
     return JSON.stringify(result);
 }

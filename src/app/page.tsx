@@ -11,6 +11,6 @@ export default async function Home() {
   if (!data.session){
     return redirect("/auth")
   } else {
-    return redirect("/cards")
+    return redirect("/boards")
   }
 }
