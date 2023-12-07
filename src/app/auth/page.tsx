@@ -7,7 +7,7 @@ export default async function page(){
     const {data} = await readUserSession()
     console.log(data)
     if (data.session){console.log("user logged in")}
-    if (data.session){return redirect('/cards')}
+    if (data.session){return redirect('/boards')}
     return(
         <div className="flex flex-col items-center justify-center w-screen h-screen">
             <AuthForm />

@@ -16,7 +16,7 @@ export default async function BoardList() {
 
   return (
     <div>
-      <div className="flex flex-col h-56 w-full">
+      <div className="flex pt-3 pl-10 flex-col h-60 w-full">
         <h2 className=" text-[1.5em] font-semibold py-3">Recently Viewed</h2>
         <div className=" w-full h-full overflow-x-scroll">
           <div className="flex flex-row flex-nowrap h-full snap-x snap-mandatory touch-auto">
