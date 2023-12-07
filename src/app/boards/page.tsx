@@ -13,7 +13,7 @@ export default async function page() {
 
   return (
     <main className="flex flex-col">
-      <BoardInput />
+      {/* <BoardInput /> */}
       <BoardList />
     </main>
   );

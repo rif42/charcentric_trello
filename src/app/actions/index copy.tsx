@@ -35,47 +35,38 @@ export default async function readUserSession() {
 //auth functions
 
 //db functions
-export async function createBoard(
-  board_title: string
-) {
+export async function createBoard(board_title: string) {
   const supabase = await createSupabaseServerClient();
-  const result = await supabase
-    .from("Boards")
-    .insert(board_title)
-    .single();
+  const result = await supabase.from("Boards").insert(board_title).single();
   return JSON.stringify(result);
 }
-
-// export async function readBoard() {
-//   const supabase = await createSupabaseServerClient();
-//   return await supabase.from("Boards").select("*");
-// }
 
 export async function readBoard() {
   const supabase = await createSupabaseServerClient();
   const { data: boards, error: boardsError } = await supabase
     .from("Boards")
+    .select("*");
+
+  if (boardsError) {
+    throw boardsError;
+  }
+
+  const boardIds = boards.map((board) => board.id);
+  const { data: cards, error: cardsError } = await supabase
+    .from("Cards")
     .select("*")
-    if (boardsError) {
-      throw boardsError;
-    }
-  
-    const boardIds = boards.map((board) => board.board_id);
-    const { data: cards, error: cardsError } = await supabase
-      .from("Cards")
-      .select("*")
-      // .in("board_id", boardIds);
-  
-    if (cardsError) {
-      throw cardsError;
-    }
-  
-    const boardsWithCards = boards.map((board) => {
-      const boardCards = cards.filter((card) => card.board_id === board.board_id);
-      return { ...board, cards: boardCards };
-    });
-  
-    return boardsWithCards;
+    .in("board_id", boardIds);
+
+  if (cardsError) {
+    throw cardsError;
+  }
+
+  const boardsWithCards = boards.map((board) => {
+    const boardCards = cards.filter((card) => card.board_id === board.id);
+    return { ...board, cards: boardCards };
+  });
+
+  return boardsWithCards;
 }
 
 export async function deleteBoard(id: string) {
