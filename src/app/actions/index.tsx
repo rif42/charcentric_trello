@@ -1,7 +1,7 @@
 "use server";
 import createSupabaseServerClient from "@/src/app/lib/supabase/server";
 import { revalidatePath } from "next/cache";
-import { BoardWithCards } from "../types"
+import { Card,BoardWithCards, AddCard } from "../types"
 
 //auth functions
 export async function signUpWithEmailAndPassword(data: {
@@ -39,6 +39,13 @@ export default async function readUserSession() {
 export async function createBoard(board_title: string) {
   const supabase = await createSupabaseServerClient();
   const result = await supabase.from("Boards").insert(board_title).single();
+  return JSON.stringify(result);
+}
+
+export async function createCard(card: AddCard){
+  const supabase = await createSupabaseServerClient();
+  const result = await supabase.from("Cards").insert(card).single();
+  revalidatePath("/boards");
   return JSON.stringify(result);
 }
 

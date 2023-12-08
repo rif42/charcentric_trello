@@ -2,7 +2,6 @@ import BoardInput from "./BoardInput";
 import BoardList from "./BoardList";
 import readUserSession from "../actions";
 import { redirect } from "next/navigation";
-import { FaPlus } from "react-icons/fa6";
 
 export default async function page() {
 
