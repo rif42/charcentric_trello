@@ -4,6 +4,7 @@ import { IoPersonCircle } from "react-icons/io5";
 import { Board, Card, BoardWithCards } from "../types";
 import IndividualCard from "./IndividualCard";
 import AddNewCard from "./AddNewCard";
+import AddNewBoard from "./AddNewBoard";
 
 export default async function BoardList() {
   const boardsWithCards = await readBoard();
@@ -20,8 +21,6 @@ export default async function BoardList() {
     // "bg-indigo-100",
     // "bg-gray-100",
   ];
-
-
 
   return (
     <div>
@@ -47,8 +46,12 @@ export default async function BoardList() {
                 </ul>
                 <AddNewCard board_id={board.board_id} />
               </div>
-              
             ))}
+            <div
+              className={`w-96 flex h-fit  p-3 pt-3 mr-5 rounded-xl flex-shrink-0`}
+            >
+              <AddNewBoard/>
+            </div>
           </div>
         </div>
       </div>

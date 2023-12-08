@@ -1,4 +1,4 @@
-import BoardInput from "./BoardInput";
+
 import BoardList from "./BoardList";
 import readUserSession from "../actions";
 import { redirect } from "next/navigation";
@@ -12,7 +12,6 @@ export default async function page() {
 
   return (
     <main className="flex flex-col">
-      {/* <BoardInput /> */}
       <BoardList />
     </main>
   );

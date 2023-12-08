@@ -8,7 +8,7 @@ import { ButtonProps, EditCardProps } from "../types";
 import UpdateCardData from "./UpdateCardData";
 
 export default function EditCard({ card, handleClick }: EditCardProps) {
-  const cancelButtonRef = useRef<HTMLButtonElement>(null);
+  const cancelButtonRef = useRef<HTMLDivElement>(null);
   const [title, setTitle] = useState(card.card_title);
   const [desc, setDesc] = useState(card.card_desc);
   // const [refresh, setRefresh] = useState(false);

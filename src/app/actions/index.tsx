@@ -38,7 +38,8 @@ export default async function readUserSession() {
 //db functions
 export async function createBoard(board_title: string) {
   const supabase = await createSupabaseServerClient();
-  const result = await supabase.from("Boards").insert(board_title).single();
+  const result = await supabase.from("Boards").insert({board_title:board_title})
+  revalidatePath("/boards");
   return JSON.stringify(result);
 }
 
@@ -97,4 +98,5 @@ export async function updateCard(card: Card) {
   revalidatePath("/boards");
   return JSON.stringify(result);
 }
+
 // db function
