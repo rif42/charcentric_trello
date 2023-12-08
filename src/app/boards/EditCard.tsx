@@ -1,6 +1,6 @@
 "use client";
 import { FaPlus } from "react-icons/fa6";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { IoIosClose } from "react-icons/io";
 import { Card, AddNewCardProps } from "../types";
 import AddCardData from "./AddCardData";
@@ -8,9 +8,10 @@ import { ButtonProps, EditCardProps } from "../types";
 import UpdateCardData from "./UpdateCardData";
 
 export default function EditCard({ card, handleClick }: EditCardProps) {
+  const cancelButtonRef = useRef<HTMLButtonElement>(null);
   const [title, setTitle] = useState(card.card_title);
   const [desc, setDesc] = useState(card.card_desc);
-  const [refresh, setRefresh] = useState(false);
+  // const [refresh, setRefresh] = useState(false);
 
   function handleSubmit(e: React.FormEvent) {
     card.card_title = title;
@@ -18,6 +19,9 @@ export default function EditCard({ card, handleClick }: EditCardProps) {
     const result = UpdateCardData(card)
     console.log("updating card", result)
     e.preventDefault();
+    if (cancelButtonRef.current) {
+      cancelButtonRef.current.click();
+    }
   }
 
   return (
@@ -40,7 +44,7 @@ export default function EditCard({ card, handleClick }: EditCardProps) {
             placeholder="Input Description Here"
           ></textarea>
           <div className="flex flex-row justify-center gap-4">
-            <div onClick={handleClick} className="w-fit px-3 py-2 mt-3 self-center rounded-lg bg-gray-200">
+            <div ref={cancelButtonRef} onClick={handleClick} className="w-fit px-3 py-2 mt-3 self-center rounded-lg bg-gray-200">
               Cancel
             </div>
             <button
