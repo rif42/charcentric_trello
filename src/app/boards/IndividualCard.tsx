@@ -26,7 +26,7 @@ export default function IndividualCard(card: Card) {
     setIsEditing(false);
   };
   return (
-    <li className="w-full p-3 bg-gray-200 rounded-xl mt-3 group">
+    <li className="w-full p-3 bg-white rounded-xl mt-3 group">
       {isEditing && <EditCard card={card} handleClick={handleClick} />}
       {!isEditing && (
         <div>

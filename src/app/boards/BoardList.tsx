@@ -12,15 +12,15 @@ export default async function BoardList() {
   // console.log(boardsWithCards[0].cards); // Do something with the fetched boards and cards data
 
   const colors = [
-    "bg-white",
-    // "bg-red-100",
-    // "bg-blue-100",
-    // "bg-green-100",
-    // "bg-yellow-100",
-    // "bg-pink-100",
-    // "bg-purple-100",
-    // "bg-indigo-100",
-    // "bg-gray-100",
+    // "bg-white",
+    "bg-red-100",
+    "bg-blue-100",
+    "bg-green-100",
+    "bg-yellow-100",
+    "bg-pink-100",
+    "bg-purple-100",
+    "bg-indigo-100",
+    "bg-gray-100",
   ];
 
   return (
@@ -32,7 +32,7 @@ export default async function BoardList() {
             {boardsWithCards?.map((board: BoardWithCards, index: number) => (
               <div
                 key={board.board_id}
-                className={`w-96 flex flex-col p-3 pt-3 mr-5 text-lg font-medium rounded-xl flex-shrink-0 ${
+                className={`w-96 h-fit flex flex-col p-3 pt-3 mr-5 text-lg font-medium rounded-xl flex-shrink-0 ${
                   colors[index % colors.length]
                 }`}
               >

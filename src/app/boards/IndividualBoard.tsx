@@ -21,7 +21,7 @@ export default function IndividualBoard(board: Board) {
   return (
     <div>
       {!isEditing && (
-        <div className="w-full p-3 flex flex-row justify-between bg-gray-200 rounded-xl text-xl group">
+        <div className="w-full p-3 flex flex-row justify-between bg-white rounded-xl text-xl group">
           <div> {board.board_title} </div>
           <div className=" flex flex-row gap-3 items-center justify-center invisible group-hover:visible">
             <button
