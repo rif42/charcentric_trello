@@ -79,9 +79,15 @@ export async function readBoard() {
   return boardsWithCards;
 }
 
-export async function deleteBoard(id: string) {
+export async function deleteBoard(board_id: string) {
   const supabase = await createSupabaseServerClient();
-  await supabase.from("Boards").delete().match({ id: id });
+  await supabase.from("Boards").delete().match({ board_id: board_id });
+  revalidatePath("/boards");
+}
+
+export async function deleteCard(card_id: string) {
+  const supabase = await createSupabaseServerClient();
+  await supabase.from("Cards").delete().match({ card_id: card_id });
   revalidatePath("/boards");
 }
 // db function

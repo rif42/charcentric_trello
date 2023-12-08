@@ -11,10 +11,11 @@ export default function AddNewCard({ board_id }: AddNewCardProps) {
   const [desc, setDesc] = useState("");
 
   function handleSubmit(e: React.FormEvent) {
-    e.preventDefault();
     const result = AddCardData({card_title:title, card_desc:desc, board_id:board_id});
     setTitle("");
     setDesc("");
+    setAddNew(false);
+    e.preventDefault();
   }
 
   return (
@@ -39,7 +40,7 @@ export default function AddNewCard({ board_id }: AddNewCardProps) {
               placeholder="Input Title Here"
             />
             <textarea
-              className="rounded-lg p-2 border-2 font-light border-gray-300"
+              className="rounded-lg p-2 text-base border-2 font-light border-gray-300"
               id="desc"
               value={desc}
               onChange={(e) => setDesc(e.target.value)}
