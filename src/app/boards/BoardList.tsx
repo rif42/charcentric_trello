@@ -1,12 +1,13 @@
-import React, { useEffect } from "react";
 import { readBoard } from "../actions";
 import { IoPersonCircle } from "react-icons/io5";
 import { Board, Card, BoardWithCards } from "../types";
 import IndividualCard from "./IndividualCard";
 import AddNewCard from "./AddNewCard";
 import AddNewBoard from "./AddNewBoard";
+import IndividualBoard from "./IndividualBoard";
 
 export default async function BoardList() {
+  
   const boardsWithCards = await readBoard();
   // console.log(boardsWithCards[0].cards); // Do something with the fetched boards and cards data
 
@@ -35,10 +36,7 @@ export default async function BoardList() {
                   colors[index % colors.length]
                 }`}
               >
-                <div className="w-full p-3 bg-gray-200 rounded-xl text-xl">
-                  {board.board_title}
-                </div>
-
+                <IndividualBoard {...board} />
                 <ul>
                   {board.cards.map((card: Card) => (
                     <IndividualCard key={card.card_id} {...card} />
@@ -50,7 +48,7 @@ export default async function BoardList() {
             <div
               className={`w-96 flex h-fit  p-3 pt-3 mr-5 rounded-xl flex-shrink-0`}
             >
-              <AddNewBoard/>
+              <AddNewBoard />
             </div>
           </div>
         </div>

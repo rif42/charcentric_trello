@@ -1,7 +1,7 @@
 "use server";
 import createSupabaseServerClient from "@/src/app/lib/supabase/server";
 import { revalidatePath } from "next/cache";
-import { Card,BoardWithCards, AddCard } from "../types"
+import { Card, BoardWithCards, AddCard, Board } from "../types";
 
 //auth functions
 export async function signUpWithEmailAndPassword(data: {
@@ -38,14 +38,9 @@ export default async function readUserSession() {
 //db functions
 export async function createBoard(board_title: string) {
   const supabase = await createSupabaseServerClient();
-  const result = await supabase.from("Boards").insert({board_title:board_title})
-  revalidatePath("/boards");
-  return JSON.stringify(result);
-}
-
-export async function createCard(card: AddCard){
-  const supabase = await createSupabaseServerClient();
-  const result = await supabase.from("Cards").insert(card).single();
+  const result = await supabase
+    .from("Boards")
+    .insert({ board_title: board_title });
   revalidatePath("/boards");
   return JSON.stringify(result);
 }
@@ -80,23 +75,43 @@ export async function readBoard() {
   return boardsWithCards;
 }
 
+export async function updateBoard(board_id: string, board_title: string) {
+  const supabase = await createSupabaseServerClient();
+  const result = await supabase
+    .from("Boards")
+    .update({ board_title: board_title })
+    .match({ board_id: board_id });
+  revalidatePath("/boards");
+  return JSON.stringify(result);
+}
+
 export async function deleteBoard(board_id: string) {
   const supabase = await createSupabaseServerClient();
   await supabase.from("Boards").delete().match({ board_id: board_id });
   revalidatePath("/boards");
 }
 
-export async function deleteCard(card_id: string) {
+export async function createCard(card: AddCard) {
   const supabase = await createSupabaseServerClient();
-  await supabase.from("Cards").delete().match({ card_id: card_id });
+  const result = await supabase.from("Cards").insert(card).single();
   revalidatePath("/boards");
+  return JSON.stringify(result);
 }
 
 export async function updateCard(card: Card) {
   const supabase = await createSupabaseServerClient();
-  const result = await supabase.from("Cards").update(card).match({ card_id: card.card_id });
+  const result = await supabase
+    .from("Cards")
+    .update(card)
+    .match({ card_id: card.card_id });
   revalidatePath("/boards");
   return JSON.stringify(result);
+}
+
+export async function deleteCard(card_id: string) {
+  const supabase = await createSupabaseServerClient();
+  await supabase.from("Cards").delete().match({ card_id: card_id });
+  revalidatePath("/boards");
 }
 
 // db function
