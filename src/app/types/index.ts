@@ -28,3 +28,12 @@ export interface BoardWithCards extends Board {
 export interface AddNewCardProps {
   board_id: string;
 }
+
+export type ButtonProps = {
+  handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+};
+
+export interface EditCardProps {
+  card: Card;
+  handleClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
+}

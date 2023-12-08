@@ -90,4 +90,11 @@ export async function deleteCard(card_id: string) {
   await supabase.from("Cards").delete().match({ card_id: card_id });
   revalidatePath("/boards");
 }
+
+export async function updateCard(card: Card) {
+  const supabase = await createSupabaseServerClient();
+  const result = await supabase.from("Cards").update(card).match({ card_id: card.card_id });
+  revalidatePath("/boards");
+  return JSON.stringify(result);
+}
 // db function
