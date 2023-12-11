@@ -25,14 +25,14 @@ export default async function BoardList() {
 
   return (
     <div>
-      <div className="flex pt-3 pl-10 flex-col w-full">
-        <h2 className="text-[1.5em] font-semibold py-3">Stuff</h2>
+      <div className="flex pt-3 md:pl-10 flex-col w-full">
+        <h2 className="text-[1.5em] font-semibold pl-3 md:pl-0 py-3">Stuff</h2>
         <div className="w-full h-fit overflow-x-scroll">
           <div className="flex flex-row flex-nowrap snap-x snap-mandatory touch-auto ">
             {boardsWithCards?.map((board: BoardWithCards, index: number) => (
               <div
                 key={board.board_id}
-                className={`w-96 h-fit flex flex-col p-3 pt-3 mr-5 text-lg font-medium rounded-xl flex-shrink-0 ${
+                className={`md:w-96 w-[100vw] h-fit flex flex-col p-3 pt-3 mr-5 text-lg font-medium rounded-xl flex-shrink-0 ${
                   colors[index % colors.length]
                 }`}
               >
