@@ -5,11 +5,16 @@ import IndividualCard from "./IndividualCard";
 import AddNewCard from "./AddNewCard";
 import AddNewBoard from "./AddNewBoard";
 import IndividualBoard from "./IndividualBoard";
+import {redirect} from "next/navigation"
+import readUserSession from "../actions";
 
 export default async function BoardList() {
-  
+  const { data } = await readUserSession();
+  if (!data.session) {
+    return redirect("/auth");
+  }
   const boardsWithCards = await readBoard();
-  // console.log(boardsWithCards[0].cards); // Do something with the fetched boards and cards data
+  console.log(boardsWithCards[0].cards)
 
   const colors = [
     // "bg-white",
