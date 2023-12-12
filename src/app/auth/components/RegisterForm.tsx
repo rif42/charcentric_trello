@@ -37,15 +37,16 @@ export default function RegisterForm() {
   });
 
   async function onSubmit (data: FormData) {
-    // toast(JSON.stringify(data));
+    // console.log(JSON.stringify(data));
+    toast("Registering... Please wait...");
     const result = await signUpWithEmailAndPassword(data);
     const {error} = JSON.parse(result);
-    error? toast.error(error.message): "Registered successfully";
+    error? toast.error(error.message): "Registered successfully. Please Check your email";
   };
 
   return (
     <form className='flex flex-col w-96 min-h-[30rem] h-[40vh] justify-center align-middle items-center bg-slate-300 rounded-bl-lg rounded-br-lg' onSubmit={handleSubmit(onSubmit)}>
-      <ToastContainer />
+      <ToastContainer autoClose={5000} closeOnClick pauseOnHover />
       <div className='flex flex-col justify-center align-middle text-center pb-10 w-[75%]'>
         <label className='pb-2'>Email</label>
         <input className='rounded-md p-3' type="email" {...register('email')} />

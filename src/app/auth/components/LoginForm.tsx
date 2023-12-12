@@ -28,6 +28,7 @@ export default function LoginForm() {
   });
 
   async function onSubmit (data: FormData) {
+    toast("Logging in... Please wait...");
     // toast(JSON.stringify(data));
     const result = await signInWithEmailAndPassword(data);
     const {error} = JSON.parse(result);
@@ -38,7 +39,7 @@ export default function LoginForm() {
     <form className='flex flex-col w-96 min-h-[30rem] h-[40vh] justify-center align-middle items-center bg-slate-300 rounded-bl-lg rounded-br-lg'
       onSubmit={handleSubmit(onSubmit)}
     >
-      <ToastContainer />
+      <ToastContainer autoClose={5000} closeOnClick pauseOnHover/>
       <div className="flex flex-col justify-center align-middle text-center pb-10 w-[75%]">
         <label className='pb-2'>Email</label>
         <input className='rounded-md p-3' type="email" {...register("email")} />
