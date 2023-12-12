@@ -32,7 +32,7 @@ export default function LoginForm() {
     // toast(JSON.stringify(data));
     const result = await signInWithEmailAndPassword(data);
     const {error} = JSON.parse(result);
-    error? toast.error(error.message): "Logged in successfully";
+    error? toast.error(error.message): toast("Logged in successfully");
   };
 
   return (

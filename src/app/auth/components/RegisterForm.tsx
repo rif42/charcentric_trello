@@ -41,7 +41,7 @@ export default function RegisterForm() {
     toast("Registering... Please wait...");
     const result = await signUpWithEmailAndPassword(data);
     const {error} = JSON.parse(result);
-    error? toast.error(error.message): "Registered successfully. Please Check your email";
+    error? toast.error(error.message): toast("Registered successfully. Please Check your email");
   };
 
   return (
